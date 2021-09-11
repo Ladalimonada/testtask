@@ -36,27 +36,6 @@ export const dataReducer = (state = initialState, action) => {
                 errorMessage: action.payload,
             }
         }
-        // case GET_MORE_DATA_SUCCESS: {
-        //     return {
-        //         ...state,
-        //         info: [...state.info, ...action.payload],
-        //         loading:false,
-        //     };
-        // }
-        // case GET_MORE_DATA_REQUEST: {
-        //     return {
-        //         ...state,
-        //         loading: true,
-        //         errorMessage: null,
-        //     };
-        // }
-        // case GET_MORE_DATA_FAILURE: {
-        //     return {
-        //         ...state,
-        //         loading:false,
-        //         errorMessage: action.payload,
-        //     }
-        // }
         default: return state;
     }
 }

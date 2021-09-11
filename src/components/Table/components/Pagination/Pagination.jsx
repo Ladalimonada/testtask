@@ -52,14 +52,14 @@ export function Pagination({ data, RenderComponent, dataLimit, setActiveItem }) 
             onClick={changePage}
             className={`paginationItem ${currentPage === item ? 'active' : null}`}
           >
-            {maxPages > 1  ? <span>{item}</span> : null}
+            {maxPages > 1 ? <span>{item}</span> : null}
           </button>
         ))}
         <button
           onClick={goToNextPage}
           className={`next 
         ${currentPage === maxPages ? 'disabled' : ''}
-        ${maxPages <= 1  ? 'nonvisible' : ''}
+        ${maxPages <= 1 ? 'nonvisible' : ''}
         `}
         >
           next
