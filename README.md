@@ -1,1 +1,1 @@
-Toy can check my project at https://ladalimonada.github.io/testtask/
+You can check my project at https://ladalimonada.github.io/testtask/
