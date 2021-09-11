@@ -1,51 +1,50 @@
 .pagination {
-    width: 100px;
+    width: 30px;
     display: flex;
-    position: absolute;
-    left: 35%;
-    top: 105%
   }
+
   
   .paginationItem {
-    margin-top: 40px;
-    border: 2px solid #666;
-    padding: 10px 15px;
-    height: 45px;
     width: 45px;
-    position: relative;
-    margin: 0 5px;
-    cursor: pointer;
+    height: 45px;
+    padding: 10px 20px;
+    font-size: 18px;
+    outline: none;
+    
   }
-  
-  .paginationItem span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
+  .paginationItem.active {
+    color: rgb(148, 146, 146);
+    pointer-events: none;
   }
   
   .prev,
   .next {
-    background: #fff;
-    border: none;
-    padding: 10px;
-    color: blue;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
     margin: 0 10px;
-    cursor: pointer;
+    padding: 10px; 
+    border: none;
+    font-size: 20px;
+  } 
+
+  .next::after {
+    content:'▶';
+    margin-left: 1em;
   }
-  
-  .paginationItem.active {
-    border: 1px solid #888;
-    color: #888;
-    pointer-events: none;
+
+  .prev::before {
+    content:'◀';
+    margin-right: 1em;
+  }
+
+  .prev{
+    margin-left: 19rem;
   }
   
   .prev.disabled,
   .next.disabled {
     pointer-events: none;
     box-shadow: none;
-    color: #999;
+    color: rgb(148, 146, 146);
   }
 
 .nonvisible {

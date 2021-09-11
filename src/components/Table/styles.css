@@ -1,19 +1,23 @@
 
 .wrapper {
   width: 70%;
+}
 
+form {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
 }
 
 table {
   width: 100%;
 	margin-bottom: 20px;
-  /* text-align: left; */
 }
+
 table thead th {
   position: sticky;
   top: 0px;
 	font-weight: bold;
-	text-align: left;
 	border: none;
 	padding: 10px 15px;
 	background: #B3E5FC;
@@ -25,19 +29,12 @@ table thead th {
 table tbody td {
 	padding: 10px 15px;
 	font-size: 16px;
-	vertical-align: top;
 }
 
 table tbody tr{
   cursor: pointer;
 }
 
-table thead tr th:first-child, table tbody tr td:first-child {
-	border-left: none;
-}
-table thead tr th:last-child, table tbody tr td:last-child {
-	border-right: none;
-}
 table tbody tr:nth-child(even){
 	background: #E1F5FE;
 }
@@ -47,8 +44,7 @@ table tbody tr:hover{
 }
 
 button {
-    border: 0;
-    border-radius: none;
+    border: none;
     font-family: inherit;
     background: inherit;
     font-weight: 700;
@@ -58,7 +54,6 @@ button {
 
 th button::after {
     content: '▲';
-    /* display: inline-block; */
     margin-left: 1em;
 }
   

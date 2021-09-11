@@ -41,7 +41,7 @@ export function Pagination({ data, RenderComponent, dataLimit, setActiveItem }) 
           onClick={goToPreviousPage}
           className={`prev 
           ${currentPage === 1 ? 'disabled' : ''}
-          ${maxPages === 0 ? 'nonvisible' : ''}
+          ${maxPages <= 1 ? 'nonvisible' : ''}
           `}
         >
           prev
@@ -52,14 +52,14 @@ export function Pagination({ data, RenderComponent, dataLimit, setActiveItem }) 
             onClick={changePage}
             className={`paginationItem ${currentPage === item ? 'active' : null}`}
           >
-            <span>{item}</span>
+            {maxPages > 1  ? <span>{item}</span> : null}
           </button>
         ))}
         <button
           onClick={goToNextPage}
           className={`next 
         ${currentPage === maxPages ? 'disabled' : ''}
-        ${maxPages === 0 ? 'nonvisible' : ''}
+        ${maxPages <= 1  ? 'nonvisible' : ''}
         `}
         >
           next

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TableItem, AdditionalInfoBlock, Pagination, Select } from './components';
-import { Input, Spinner } from '../../components';
+import { TableItem, AdditionalInfoBlock, Pagination, Select, Input, Spinner } from './components';
 import styles from './styles.css'
 
 export function Table() {
