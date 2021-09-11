@@ -1,11 +1,10 @@
 import React, {useState} from 'react'
+import styles from './styles.css'
 
-
-export function Pagination({ data, RenderComponent, pageLimit, dataLimit, onClick }) {
-    const [activeLine, setActiveLine] = useState('');
-    const [pages] = useState(Math.round(data.length / dataLimit));
+export function Pagination({ data, RenderComponent, pageLimit, dataLimit, setActiveItem }) {
+    let maxPages = Math.round(data.length / dataLimit);
+    
     const [currentPage, setCurrentPage] = useState(1);
-  
     function goToNextPage() {
         setCurrentPage((page) => page + 1);
     }
@@ -33,7 +32,7 @@ export function Pagination({ data, RenderComponent, pageLimit, dataLimit, onClic
     return (
           <>
           {getPaginatedData().map((item) => (
-        <RenderComponent key={item.phone} data={item} onClick={()=>setActiveLine(item.phone)}/>
+        <RenderComponent key={item.phone} data={item} onClick={()=>setActiveItem(item)}/>
       ))}
       <div className="pagination">
       <button
@@ -53,7 +52,7 @@ export function Pagination({ data, RenderComponent, pageLimit, dataLimit, onClic
       ))}
       <button
         onClick={goToNextPage}
-        className={`next ${currentPage === pages ? 'disabled' : ''}`}
+        className={`next ${currentPage === maxPages ? 'disabled' : ''}`}
       >
         next
       </button>

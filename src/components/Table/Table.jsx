@@ -10,11 +10,13 @@ export function Table() {
   const {
     loading, info, errorMessage,
   } = useSelector((state) => state.data);
-
-  const [activeLine, setActiveLine] = useState('');
+  const [selectedValue, setSelectedValue] = useState(0);
+  const [activeItem, setActiveItem] = useState('');
   const [value, setValue] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
-  let sortedInfo = [...info.filter(obj => obj.firstName.includes(value) || obj.lastName.includes(value))];
+  let sortedInfo = [...info.filter(obj => selectedValue ? obj.adress.state === selectedValue && (obj.firstName.includes(value) || obj.lastName.includes(value)):(obj.firstName.includes(value) || obj.lastName.includes(value)))];
+
+
 
   sortedInfo.sort((a, b) => {
     if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -41,20 +43,28 @@ export function Table() {
     return sortConfig.key === name ? sortConfig.direction : undefined
   }
 
-  const getActiveLine = (e) => {
-    setActiveLine(e.target.phone)
+  const getActiveItem = (item) => {
+    setActiveItem(item)
   }
 
-  return (<wrapper>
+  const handleChange = e => {
+    setSelectedValue(e.target.value);
+    
+  };
+
+  return (<div className="wrapper">
     <form onSubmit={(event) => {
       event.preventDefault();
     }}>
       <Input placeholder='Search by Name' value={value} onChangeText={setValue} />
-      <select name="states" id="states">
-        <option value="al">AL</option>
-        <option value="or">OR</option>
-        <option value="nj">NJ</option>
-        <option value="or">OR</option>
+      <select name="states" id="states" onChange={handleChange} value={selectedValue}>
+        <option value={null}></option>
+        <option value="AL">AL</option>
+        <option value="OR">OR</option>
+        <option value="NJ">NJ</option>
+        <option value="NY">NY</option>
+        <option value="IA">IA</option>
+        <option value="AR">AR</option>
       </select>
     </form>
     <table info={info}>
@@ -85,22 +95,18 @@ export function Table() {
       <tbody>
         {loading ? <Spinner /> : null}
         {errorMessage ? <h2 style={{ color: 'red' }}>{errorMessage}</h2> : null}
-        {/* {sortedInfo.map((item) => (
-          <TableItem info={item} onClick={(e) => setActiveLine(item.phone)}
-            key={item.phone}></TableItem>))} */}
-            <Pagination
+        {info?  <Pagination
             data={sortedInfo}
             RenderComponent={TableItem}
-            pageLimit={5}
+            pageLimit={6}
             dataLimit={20}
-          />
+            setActiveItem={getActiveItem}
+          /> : null} 
       </tbody>
     </table>
-    {activeLine ? sortedInfo
-      .filter((item) => item.phone === activeLine)
-      .map((item) => (
-        <AdditionalInfoBlock info={item} onClick={() => setActiveLine(null)}></AdditionalInfoBlock>
-      )) : null}
-  </wrapper>)
+    {activeItem ? 
+        <AdditionalInfoBlock info={activeItem} onClick={() => setActiveItem(null)}></AdditionalInfoBlock>
+       : null}
+  </div>)
 }
 
