@@ -16,4 +16,6 @@ border: 1px solid #B3E5FC;
 background: #E1F5FE;
 outline: none;
 color: black;
+&::-webkit-input-placeholder {
+    color: black;}
 `;

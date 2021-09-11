@@ -1,62 +1,70 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styles from './styles.css'
 
-export function Pagination({ data, RenderComponent, pageLimit, dataLimit, setActiveItem }) {
-    let maxPages = Math.round(data.length / dataLimit);
-    
-    const [currentPage, setCurrentPage] = useState(1);
-    function goToNextPage() {
-        setCurrentPage((page) => page + 1);
-    }
-  
-    function goToPreviousPage() {
-        setCurrentPage((page) => page - 1);
-    }
-  
-    function changePage(event) {
-        const pageNumber = Number(event.target.textContent);
-        setCurrentPage(pageNumber);
-    }
-  
-    const getPaginatedData = () => {
-        const startIndex = currentPage * dataLimit - dataLimit;
-        const endIndex = startIndex + dataLimit;
-        return data.slice(startIndex, endIndex);
-    };
-  
-    const getPaginationGroup = () => {
-        let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
-        return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
-    };
-  
-    return (
-          <>
-          {getPaginatedData().map((item) => (
-        <RenderComponent key={item.phone} data={item} onClick={()=>setActiveItem(item)}/>
+export function Pagination({ data, RenderComponent, dataLimit, setActiveItem }) {
+
+  let maxPages = Math.round(data.length / dataLimit);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  function goToNextPage() {
+    setCurrentPage((page) => page + 1);
+  }
+
+  function goToPreviousPage() {
+    setCurrentPage((page) => page - 1);
+  }
+
+  function changePage(event) {
+    const pageNumber = Number(event.target.textContent);
+    setCurrentPage(pageNumber);
+  }
+
+  const getPaginatedData = () => {
+    const startIndex = currentPage * dataLimit - dataLimit;
+    const endIndex = startIndex + dataLimit;
+    return data.slice(startIndex, endIndex);
+  };
+
+  const getPaginationGroup = () => {
+    let start = Math.floor((currentPage - 1) / maxPages) * maxPages;
+    return new Array(maxPages).fill().map((_, idx) => start + idx + 1);
+  };
+
+  return (
+    <>
+      {getPaginatedData().map((item) => (
+        <RenderComponent key={item.phone} data={item} onClick={() => setActiveItem(item)} />
       ))}
       <div className="pagination">
-      <button
-        onClick={goToPreviousPage}
-        className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
-      >
-        prev
-      </button>
-      {getPaginationGroup().map((item, index) => (
         <button
-          key={index}
-          onClick={changePage}
-          className={`paginationItem ${currentPage === item ? 'active' : null}`}
+          onClick={goToPreviousPage}
+          className={`prev 
+          ${currentPage === 1 ? 'disabled' : ''}
+          ${maxPages === 0 ? 'nonvisible' : ''}
+          `}
         >
-          <span>{item}</span>
+          prev
         </button>
-      ))}
-      <button
-        onClick={goToNextPage}
-        className={`next ${currentPage === maxPages ? 'disabled' : ''}`}
-      >
-        next
-      </button>
-    </div>
-          </>
-      );
-  }
+        {getPaginationGroup().map((item, index) => (
+          <button
+            key={index}
+            onClick={changePage}
+            className={`paginationItem ${currentPage === item ? 'active' : null}`}
+          >
+            <span>{item}</span>
+          </button>
+        ))}
+        <button
+          onClick={goToNextPage}
+          className={`next 
+        ${currentPage === maxPages ? 'disabled' : ''}
+        ${maxPages === 0 ? 'nonvisible' : ''}
+        `}
+        >
+          next
+        </button>
+      </div>
+    </>
+  );
+}
