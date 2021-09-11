@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TableItem, AdditionalInfoBlock, Pagination, Select, Input, Spinner } from './components';
+import {
+  TableItem,
+  AdditionalInfoBlock,
+  Pagination,
+  Select,
+  Input,
+  Spinner,
+} from './components';
 import styles from './styles.css'
 
 export function Table() {
@@ -8,15 +15,15 @@ export function Table() {
   const {
     loading, info, errorMessage,
   } = useSelector((state) => state.data);
-  
+
   const [selectedValue, setSelectedValue] = useState(null);
   const [activeItem, setActiveItem] = useState('');
   const [value, setValue] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
+
   const sortedInfo = getFilteredData(info);
 
 
-  //filtering logic
   function getFilteredData(array) {
     return (
       [...array.filter(obj =>
@@ -66,7 +73,7 @@ export function Table() {
       <Input placeholder='Search by Name' value={value} onChangeText={setValue} />
       <Select value={selectedValue} setSelectedValue={handleChange}></Select>
     </form>
-    <table info={info}>
+    <table >
       <thead>
         <tr>
           <th><button type="button" onClick={() => requestSort('id')}
