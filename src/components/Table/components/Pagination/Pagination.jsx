@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './styles.css'
 
 export function Pagination({ data, RenderComponent, dataLimit, setActiveItem }) {
 
-  let maxPages = Math.round(data.length / dataLimit);
+  const maxPages =  Math.round(data.length / dataLimit);
 
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    if (data.length) {
+      setCurrentPage(1)}
+  }, [data.length] )
+
 
   function goToNextPage() {
     setCurrentPage((page) => page + 1);
@@ -18,6 +24,7 @@ export function Pagination({ data, RenderComponent, dataLimit, setActiveItem }) 
   function changePage(event) {
     const pageNumber = Number(event.target.textContent);
     setCurrentPage(pageNumber);
+
   }
 
   const getPaginatedData = () => {
@@ -52,13 +59,13 @@ export function Pagination({ data, RenderComponent, dataLimit, setActiveItem }) 
             onClick={changePage}
             className={`paginationItem ${currentPage === item ? 'active' : null}`}
           >
-            {maxPages > 1 ? <span>{item}</span> : null}
+            <span>{item}</span>
           </button>
         ))}
         <button
           onClick={goToNextPage}
           className={`next 
-        ${currentPage === maxPages ? 'disabled' : ''}
+        ${currentPage === maxPages  ? 'disabled' : ''}
         ${maxPages <= 1 ? 'nonvisible' : ''}
         `}
         >
@@ -68,3 +75,4 @@ export function Pagination({ data, RenderComponent, dataLimit, setActiveItem }) 
     </>
   );
 }
+

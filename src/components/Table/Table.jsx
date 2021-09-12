@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   TableItem,
@@ -22,7 +22,6 @@ export function Table() {
   const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
 
   const sortedInfo = getFilteredData(info);
-
 
   function getFilteredData(array) {
     return (
