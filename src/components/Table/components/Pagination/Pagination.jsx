@@ -59,7 +59,7 @@ export function Pagination({ data, RenderComponent, dataLimit, setActiveItem }) 
             onClick={changePage}
             className={`paginationItem ${currentPage === item ? 'active' : null}`}
           >
-            <span>{item}</span>
+            {maxPages > 1 ? <span>{item}</span> : null}
           </button>
         ))}
         <button
